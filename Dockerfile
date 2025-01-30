@@ -1,14 +1,14 @@
-# Use an official PHP runtime as a parent image
-FROM php:7.4-cli
+# Use an official PHP image with Apache
+FROM php:7.4-apache
 
-# Set the working directory in the container
-WORKDIR /usr/src/myapp
+# Set the working directory
+WORKDIR /var/www/html
 
-# Copy the current directory contents into the container at /usr/src/myapp
-COPY . .
+# Copy website files into the container
+COPY . /var/www/html/
 
-# Make port 80 available to the world outside this container
+# Expose port 80
 EXPOSE 80
 
-# Run index.php when the container launches
-CMD [ "php", "./index.php" ]
+# Start Apache when the container runs
+CMD ["apache2-foreground"]
