@@ -38,17 +38,16 @@ jobs:
       env:
         KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
       run: |
-        mkdir -p $HOME/.kube
-        echo "${KUBE_CONFIG_DATA}" | base64 --decode > $HOME/.kube/config
-        chmod 600 $HOME/.kube/config
-        export KUBECONFIG=$HOME/.kube/config
+        mkdir -p ${HOME}/.kube  # Ensure the .kube directory exists
+        echo "${KUBE_CONFIG_DATA}" | base64 --decode > ${HOME}/.kube/config
+        chmod 600 ${HOME}/.kube/config
+        export KUBECONFIG=${HOME}/.kube/config
 
     - name: Debug Kubeconfig
       run: |
-        ls -la $HOME/.kube
-        cat $HOME/.kube/config | head -n 10  # Print first 10 lines (to check if it's not empty)
+        ls -la ${HOME}/.kube
+        cat ${HOME}/.kube/config | head -n 10  # Print first 10 lines (to check if it's not empty)
 
     - name: Deploy to Kubernetes
       run: |
-        export KUBECONFIG=$HOME/.kube/config
         kubectl set image deployment/my-deployment my-container=kinyuawan/kubekrotos:latest
