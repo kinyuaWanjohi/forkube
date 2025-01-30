@@ -38,7 +38,7 @@
 <body>
     <div class="container">
         <h1>Welcome to My PHP Website</h1>
-        <p>Sasa Hizi ni gani maze, service  haiamki!</p>
+        <p>We have some good progress here!</p>
     </div>
 </body>
 </html>
