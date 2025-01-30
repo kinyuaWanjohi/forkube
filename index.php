@@ -7,7 +7,7 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
+            background-color: #ff0000; /* Red background */
             margin: 0;
             padding: 0;
             display: flex;
@@ -20,7 +20,7 @@
             text-align: center;
         }
         h1 {
-            color: #007bff;
+            color: #ffffff; /* White text for better contrast */
         }
     </style>
 </head>
