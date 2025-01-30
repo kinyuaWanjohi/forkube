@@ -39,6 +39,7 @@
     <div class="container">
         <h1>Welcome to My PHP Website</h1>
         <p>We've made great progress!</p>
+        <p>Look at the far we`ve come!</p>
     </div>
 </body>
 </html>
