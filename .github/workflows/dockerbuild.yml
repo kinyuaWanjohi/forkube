@@ -38,5 +38,123 @@ jobs:
       env:
         KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
       run: |
+        mkdir -p ${HOME}/.kube
+        echo "${KUBE_CONFIG_DATA}" | base64 --decode > ${HOME}/.kube/config
+        kubectl set image deployment/my-deployment simplewebsite=kinyuawan/kubekrotos:latest
+Explanation
+Create the .kube Directory:
+
+The mkdir -p ${HOME}/.kube command ensures that the .kube directory exists before attempting to write the kubeconfig file to it.
+Decode and Write the Kubeconfig File:
+
+The echo "${KUBE_CONFIG_DATA}" | base64 --decode > ${HOME}/.kube/config command decodes the base64-encoded kubeconfig data and writes it to the .kube/config file.
+Update the Deployment Image:
+
+The kubectl set image deployment/my-deployment simplewebsite=kinyuawan/kubekrotos:latest command updates the image of the simplewebsite container in the my-deployment deployment.
+This should resolve the error and allow your workflow to complete successfully. Let me know if you need any further assistance!
+
+
+Edit in Pages
+
+
+
+AI-generated content may be incorrect
+You said:
+
+correct this
+name: Build, Push, and Deploy
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v1
+
+    - name: Login to Docker Hub
+      uses: docker/login-action@v1
+      with:
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+
+    - name: Build and push
+      uses: docker/build-push-action@v2
+      with:
+        context: .
+        push: true
+        tags: kinyuawan/kubekrotos:latest
+
+    - name: Set up kubectl
+      uses: azure/setup-kubectl@v1
+      with:
+        version: 'v1.18.0'
+
+    - name: Deploy to Kubernetes
+      env:
+        KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
+      run: |
         echo "${KUBE_CONFIG_DATA}" | base64 --decode > ${HOME}/.kube/config
         kubectl set image my-deployment/simplewebsite container=kinyuawan/kubekrotos:latest
+        - name: Set up Kubeconfig
+  run: |
+    mkdir -p ${HOME}/.kube  # Ensure the .kube directory exists
+    echo "${KUBE_CONFIG_DATA}" | base64 --decode > ${HOME}/.kube/config
+Copilot said:
+Copilot
+It looks like there are some formatting issues in your GitHub Actions workflow file. Here’s the corrected version:
+
+name: Build, Push, and Deploy
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v1
+
+    - name: Login to Docker Hub
+      uses: docker/login-action@v1
+      with:
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+
+    - name: Build and push
+      uses: docker/build-push-action@v2
+      with:
+        context: .
+        push: true
+        tags: kinyuawan/kubekrotos:latest
+
+    - name: Set up kubectl
+      uses: azure/setup-kubectl@v1
+      with:
+        version: 'v1.18.0'
+
+    - name: Set up Kubeconfig
+      env:
+        KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
+      run: |
+        mkdir -p ${HOME}/.kube  # Ensure the .kube directory exists
+        echo "${KUBE_CONFIG_DATA}" | base64 --decode > ${HOME}/.kube/config
+
+    - name: Deploy to Kubernetes
+      run: |
+        kubectl set image deployment/my-deployment simplewebsite=kinyuawan/kubekrotos:latest
