@@ -7,7 +7,7 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #ff0000; /* Red background */
+            background-color: #4CAF50; /* Soft Green background */
             margin: 0;
             padding: 0;
             display: flex;
@@ -18,16 +18,24 @@
         }
         .container {
             text-align: center;
+            padding: 20px; /* Added padding for spacing */
+            border-radius: 10px; /* Rounded corners */
+            background-color: #ffffff; /* White background for container */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
         }
         h1 {
-            color: #ffffff; /* White text for better contrast */
+            color: #ffffff; /* White text for contrast */
+        }
+        p {
+            font-size: 1.2em; /* Increased font size for better readability */
+            color: #f1f1f1; /* Light grey text for a softer look */
         }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>Welcome to My Updated PHP Website</h1>
-        <p>This is an updated version of the simple PHP page.</p>
+        <p>Enjoy exploring this updated version of the PHP page with a fresh look and feel!</p>
     </div>
 </body>
 </html>
